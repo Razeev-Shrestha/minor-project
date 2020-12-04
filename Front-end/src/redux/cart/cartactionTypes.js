@@ -1,0 +1,8 @@
+const cartactionTypes = {
+    CART_ADD_ITEM: 'CART_ADD_ITEM',
+    CART_REMOVE_ITEM: 'CART_REMOVE_ITEM',
+    SAVE_DELIVERY_ADDRESS: 'SAVE_DELIVERY_ADDRESS',
+    SAVE_PAYMENT_METHOD: 'SAVE_PAYMENT_METHOD',
+}
+
+export default cartactionTypes
