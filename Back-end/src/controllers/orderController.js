@@ -1,6 +1,6 @@
-const db = require('../../db/index.dbconfig')
+const db = require('../db/index.dbconfig')
 const asyncHandler = require('express-async-handler')
-const tokenGenerator = require('../../../utils/jwtGenerator')
+const tokenGenerator = require('../../utils/jwtGenerator')
 const axios = require('axios')
 const env = require('dotenv')
 
@@ -52,7 +52,7 @@ exports.addOrderItems = asyncHandler(async (req, res) => {
 
 exports.getOrderItemsById = asyncHandler(async (req, res) => {
     const dbResults = await db.query(
-        `SELECT orders.*,users.first_name,users.last_name,users.email FROM orders LEFT JOIN users ON orders.user_id=users.user_id WHERE order_id=$1`,
+        `SELECT orders.*,users.first_name,users.last_name,users.email_id FROM orders LEFT JOIN users ON orders.user_id=users.user_id WHERE order_id=$1`,
         [req.params.id]
     )
     if (dbResults) {

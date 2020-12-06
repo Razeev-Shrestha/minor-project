@@ -17,7 +17,7 @@ import {
 const Signuppage = ({ location, history }) => {
     const [firstName, setfirstName] = useState('');
     const [lastName, setLastName] = useState('');
-    const [email, setEmail] = useState('');
+    const [email_id, setEmail] = useState('');
     const [phonenumber, setphoneNumber] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setconfirmPassword] = useState('');
@@ -42,7 +42,7 @@ const Signuppage = ({ location, history }) => {
         if (password !== confirmPassword) {
             setMessage('Passwords do not match')
         } else {
-            dispatch(signUp(firstName, lastName, email, phonenumber, password, dateofBirth))
+            dispatch(signUp(firstName, lastName, email_id, phonenumber, password, dateofBirth))
         }
 
     }
@@ -94,7 +94,7 @@ const Signuppage = ({ location, history }) => {
                             <Form.Control
                                 type='email'
                                 placeholder='Enter Email Address'
-                                value={email}
+                                value={email_id}
                                 required
                                 onChange={event => setEmail(event.target.value)}
                             ></Form.Control>

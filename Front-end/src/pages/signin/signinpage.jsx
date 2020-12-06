@@ -9,7 +9,7 @@ import Formcontainer from '../../components/FormContainer';
 import Header from '../../components/Header/Header.component';
 
 const Signinpage = ({ location, history }) => {
-    const [email, setEmail] = useState('');
+    const [email_id, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     const dispatch = useDispatch();
@@ -27,7 +27,7 @@ const Signinpage = ({ location, history }) => {
 
     const submitHandler = (event) => {
         event.preventDefault()
-        dispatch(signIn(email, password))
+        dispatch(signIn(email_id, password))
     }
     return (
         <>
@@ -43,7 +43,7 @@ const Signinpage = ({ location, history }) => {
                             <Form.Control
                                 type='email'
                                 placeholder='Enter Email Address'
-                                value={email}
+                                value={email_id}
                                 required
                                 onChange={event => setEmail(event.target.value)}
                             ></Form.Control>

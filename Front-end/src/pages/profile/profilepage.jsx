@@ -19,7 +19,7 @@ import { listMyOrder } from '../../redux/orders/orderactions'
 const Profilepage = ({ history }) => {
     const [firstName, setfirstName] = useState('');
     const [lastName, setLastName] = useState('');
-    const [email, setEmail] = useState('');
+    const [email_id, setEmail] = useState('');
     const [phonenumber, setphoneNumber] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setconfirmPassword] = useState('');
@@ -53,7 +53,7 @@ const Profilepage = ({ history }) => {
                 setLastName(user.last_name)
                 setphoneNumber(user.phone_number)
                 setdateofBirth(user.date_of_birth)
-                setEmail(user.email)
+                setEmail(user.email_id)
             }
         }
     }, [dispatch, history, userInfo, user])
@@ -108,7 +108,7 @@ const Profilepage = ({ history }) => {
                             <Form.Control
                                 type='email'
                                 placeholder='Enter Email Address'
-                                value={email}
+                                value={email_id}
                                 required
                                 disabled
                                 onChange={event => setEmail(event.target.value)}
@@ -182,10 +182,10 @@ const Profilepage = ({ history }) => {
                                 {orders?.data.map(order => (
                                     <tr key={order.order_id}>
                                         <td>{order.order_id}</td>
-                                        <td>{order.created_at.substring(0, 10)}</td>
+                                        <td>{order.created_at}</td>
                                         <td>Rs.{order.total_price}</td>
-                                        <td>{order.is_paid ? order.paid_at.substring(0, 10) : (<i className='fas fa-times mx-4' style={{ color: 'red' }}></i>)}</td>
-                                        <td>{order.isdelivered ? order.delivered_at.substring(0, 10) : (<i className='fas fa-times mx-5' style={{ color: 'red' }}></i>)}</td>
+                                        <td>{order.is_paid ? order.paid_at : (<i className='fas fa-times mx-4' style={{ color: 'red' }}></i>)}</td>
+                                        <td>{order.isdelivered ? order.delivered_at: (<i className='fas fa-times mx-5' style={{ color: 'red' }}></i>)}</td>
                                         <td>
                                             <LinkContainer to={`/order/${order.order_id}`}>
                                                 <Button className='btn-sm' variant='dark'>Details</Button>

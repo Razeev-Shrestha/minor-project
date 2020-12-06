@@ -2,19 +2,11 @@ const router = require('express').Router()
 
 const {
     newuserSignup,
-} = require('../controllers/userscontrollers/user.signup.controller')
-const {
     userDelete,
-} = require('../controllers/userscontrollers/user.delete.controller')
-const {
-    userUpdate,
-} = require('../controllers/userscontrollers/user.update.controller')
-const {
     userDetails,
-} = require('../controllers/userscontrollers/user.detail.controller')
-const {
     userSignin,
-} = require('../controllers/userscontrollers/user.signin.controller')
+    userUpdate
+} = require('../controllers/userController')
 
 const { verifyToken } = require('../../middleware/authorization.middleware')
 
@@ -24,9 +16,9 @@ router
     .route('/userdetail/')
     .get(verifyToken, userDetails)
     .put(verifyToken, userUpdate)
+    .delete(verifyToken, userDelete)
 
 router.post('/signup', newuserSignup)
 
-router.delete('/userdetail/', verifyToken, userDelete)
 
 module.exports = router

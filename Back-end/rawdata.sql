@@ -1,13 +1,16 @@
+CREATE DATABASE ecommerce;
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
 CREATE TABLE users(
     user_id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
     first_name VARCHAR(255)NOT NULL,
     last_name VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL,
+    email_id VARCHAR(255) NOT NULL,
     phone_number bigint NOT NULL,
     password VARCHAR(255) NOT NULL,
     date_of_birth DATE NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP ,
-    UNIQUE (email)
+    UNIQUE (email_id)
 );
 //
 CREATE TABLE admins(
@@ -30,8 +33,8 @@ CREATE TABLE products(
     number_of_reviews NUMERIC NOT NULL DEFAULT 0,
     product_price NUMERIC NOT NULL DEFAULT 0,
     count_in_stock NUMERIC NOT NULL DEFAULT 0,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP ,
-    -- FOREIGN KEY (product_id) REFERENCES reviews(review_id)
+    vendor_id uuid ,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP 
 );
 
 CREATE TABLE reviews(
@@ -53,18 +56,17 @@ CREATE TABLE orderitems(
 
 CREATE TABLE orders(
     order_id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
-    tax_price NUMERIC NOT NULL,
-    shipping_price NUMERIC NOT NULL,
-    total_price NUMERIC NOT NULL,
-    paymentmethod VARCHAR(255) NOT NULL,
+    tax_price REAL NULL,
+    delivery_price REAL NULL,
+    total_price REAL NULL,
+    items_price REAL NOT NULL,
+    delivery_address JSON,
+    ordered_items JSON,
+    payment_method VARCHAR(255) NOT NULL,
     is_paid BOOLEAN DEFAULT FALSE,
     paid_at TIMESTAMP,
     isdelivered BOOLEAN DEFAULT FALSE,
     delivered_at TIMESTAMP,
-    -- FOREIGN KEY(order_id) REFERENCES orderitems(items_id),
-    -- FOREIGN KEY(order_id) REFERENCES shippingaddress(address_id),
-    -- FOREIGN KEY(order_id) REFERENCES paymentresult(payment_id),
-    -- FOREIGN key(order_id) REFERENCES users(user_id)
 );
 
 
@@ -72,10 +74,10 @@ CREATE TABLE orders(
 CREATE TABLE payment_result(
     payment_id  VARCHAR(255) PRIMARY KEY ,
     status VARCHAR(255) NOT NULL,
-    update_time TIMESTAMP
+    update_time TIMESTAMP,
     amount real,
     token VARCHAR(255),
-    user_id uuid DEFAULT uuid_generate_v4(),
+    user_id uuid ,
     payment_type VARCHAR(255),
     payment_gateway VARCHAR(255) 
 );

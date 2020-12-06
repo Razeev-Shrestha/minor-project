@@ -1,14 +1,10 @@
 const router = require('express').Router()
 
 const {
-    getallProducts,
-} = require('../controllers/productcontrollers/getallProducts.controller')
-const {
     addnewProduct,
-} = require('../controllers/productcontrollers/addProduct.controller')
-const {
-    getsingleProduct,
-} = require('../controllers/productcontrollers/getsingleProduct.controller')
+    getallProducts,
+    getsingleProduct
+} = require('../controllers/productController')
 
 router.get('/', getallProducts)
 

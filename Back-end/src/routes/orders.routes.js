@@ -5,7 +5,7 @@ const {
     getOrderItemsById,
     updateOrderToPaid,
     ordersOfLoggedInUser
-} = require('../controllers/ordercontrollers/orderController')
+} = require('../controllers/orderController')
 const { verifyToken } = require('../../middleware/authorization.middleware')
 
 router.post('/', verifyToken, addOrderItems)

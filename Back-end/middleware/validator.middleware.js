@@ -3,14 +3,14 @@ const joi = require('joi')
 exports.usersignupvalidateSchema = joi.object({
     first_name: joi.string().min(3).required(),
     last_name: joi.string().min(3).required(),
-    email: joi.string().min(4).email().required(),
+    email_id: joi.string().min(4).email().required(),
     phone_number: joi.number().min(5).required(),
     password: joi.string().min(6).required(),
     date_of_birth: joi.date().required(),
 })
 
 exports.usersigninvalidateSchema = joi.object({
-    email: joi.string().min(4).email().required(),
+    email_id: joi.string().min(4).email().required(),
     password: joi.string().required(),
 })
 

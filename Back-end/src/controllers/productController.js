@@ -1,8 +1,7 @@
-const db = require('../../db/index.dbconfig');
+const db = require('../db/index.dbconfig');
+const asyncHandler=require('express-async-handler')
 
-exports.addnewProduct = async (req, res) => {
-   try {
-       console.log(req.body.name);
+exports.addnewProduct = asyncHandler(async (req, res) => {
       const newproductResults = await db.query(
          'INSERT INTO products (product_name,product_image,product_brand,product_category,product_description,rating,number_of_reviews,product_price,count_in_stock) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9) RETURNING * ',
          [
@@ -21,10 +20,23 @@ exports.addnewProduct = async (req, res) => {
           status:'success',
           message:newproductResults.rows
       })
-   } catch (error) {
-      console.log(`${error.message}`);
-      res.status(401).json({
-         status: 'failure',
-      });
-   }
-};
+});
+
+
+exports.getallProducts=asyncHandler(async(req,res)=>{
+    const allproducts=await db.query('SELECT * FROM products');
+    res.send(allproducts);
+})
+
+exports.getsingleProduct = asyncHandler(async (req, res) => {
+    const product = await db.query(
+        'SELECT * FROM products WHERE product_id=$1',
+        [req.params.id]
+    )
+    if (product) {
+        res.send(product.rows)
+    } else {
+        res.status(404)
+        throw new Error('Product Not Found')
+    }
+})

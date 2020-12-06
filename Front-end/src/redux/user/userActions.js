@@ -2,7 +2,7 @@ import axios from 'axios'
 import useractionTypes from './userActionTypes'
 import orderactionTypes from '../orders/orderactionTypes'
 
-export const signIn = (email, password) => async (dispatch) => {
+export const signIn = (email_id, password) => async (dispatch) => {
     try {
         dispatch({
             type: useractionTypes.USER_SIGNIN_REQUEST,
@@ -15,7 +15,7 @@ export const signIn = (email, password) => async (dispatch) => {
         }
         const { data } = await axios.post(
             '/api/users/signin',
-            { email, password },
+            { email_id, password },
             config
         )
 
@@ -51,7 +51,7 @@ export const signOut = () => (dispatch) => {
 export const signUp = (
     first_name,
     last_name,
-    email,
+    email_id,
     phone_number,
     password,
     date_of_birth
@@ -71,7 +71,7 @@ export const signUp = (
             {
                 first_name,
                 last_name,
-                email,
+                email_id,
                 phone_number,
                 date_of_birth,
                 password,
