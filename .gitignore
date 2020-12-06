@@ -15,6 +15,7 @@ node_modules/
 # misc
 .DS_Store
 .env
+rawdata.sql
 
 .env.local
 .env.development.local
