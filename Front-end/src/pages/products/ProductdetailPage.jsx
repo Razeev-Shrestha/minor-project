@@ -21,7 +21,7 @@ import Loader from '../../components/loader/loader.component';
 const ProductdetailPage = ({ history, match }) => {
    const [qty, setQty] = useState(1);
    const dispatch = useDispatch();
-
+   const userSignin = useSelector(state => state.userSignin)
    const productDetail = useSelector(state => state.productDetail)
    const { error, product, loading } = productDetail;
    useEffect(() => {

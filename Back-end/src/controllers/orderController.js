@@ -131,3 +131,18 @@ exports.ordersOfLoggedInUser = asyncHandler(async (req, res) => {
         data: dbResults.rows,
     })
 })
+
+exports.adminDetails = asyncHandler(async (req, res) => {
+       const adminDbresults = await db.query(
+          'SELECT * FROM admins WHERE user_id=$1',
+          [req.user]
+       );
+       res.status(200).json({
+          status: 'success',
+          results: adminDbresults.rows.length,
+          data: {
+             user: adminDbresults.rows,
+          },
+       });
+    
+ })

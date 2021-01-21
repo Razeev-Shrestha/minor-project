@@ -1,6 +1,6 @@
 const router=require('express').Router()
 
-const {sendMail}=require('../controllers/emailcontrollers/emailcontroller')
+const {sendMail}=require('../controllers/emailcontroller')
 
 router.post('/',sendMail)
 
